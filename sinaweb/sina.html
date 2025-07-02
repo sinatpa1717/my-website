@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>صفحه سینا</title>
+  <style>
+    @font-face {
+      font-family: 'dv';
+      src: url("dv/DiodrumArabic-Medium.ttf");
+    }
+    @font-face {
+      font-family: 'ess';
+      src: url("estedad/Estedad-Black.ttf");
+    }
+    
+    * {
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'dv', 'Tahoma', sans-serif;
+      background-image: url('zamin.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      text-align: center;
+      color: white;
+      background-color: #0a0a0a;
+      padding: 15px;
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    
+    h1, h2, h3 {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 15px 25px;
+      border-radius: 15px;
+      margin-bottom: 25px;
+      backdrop-filter: blur(10px);
+    }
+    
+    h1 {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: bold;
+    }
+    
+    h2 {
+      font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+      line-height: 1.6;
+    }
+    
+    h3 {
+      font-family: 'ess', 'Tahoma', sans-serif;
+      border-bottom: 4px solid #335270;
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+    }
+    
+    nav {
+      margin-bottom: 40px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    nav a {
+      color: white;
+      background: rgba(0, 0, 0, 0.6);
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      font-family: 'ess', 'Tahoma', sans-serif;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      display: inline-block;
+      backdrop-filter: blur(5px);
+      min-width: 120px;
+    }
+    
+    nav a:hover {
+      background: #335270;
+      box-shadow: 0 8px 25px rgba(51, 82, 112, 0.4);
+      transform: translateY(-2px);
+      border-color: #fff;
+    }
+    
+    .about-section {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
+    }
+    
+    .about-section img {
+      width: 220px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 20px;
+      flex-shrink: 0;
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    
+    .about-text {
+      max-width: 600px;
+      text-align: right;
+      font-family: 'dv', 'Tahoma', sans-serif;
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .about-text h1 {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      margin-bottom: 20px;
+      text-align: center;
+      background: rgba(0,0,0,0.6);
+      padding: 15px 20px;
+      border-radius: 15px;
+    }
+    
+    .about-text p {
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      line-height: 1.8;
+      background: rgba(0,0,0,0.5);
+      padding: 20px;
+      border-radius: 15px;
+      text-align: justify;
+      backdrop-filter: blur(5px);
+    }
+
+    .skills {
+      max-width: 700px;
+      margin: 50px auto;
+      color: white;
+      font-family: 'dv', 'Tahoma', sans-serif;
+      background: rgba(0,0,0,0.6);
+      padding: 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .skills h1 {
+      margin-bottom: 30px;
+      background: rgba(0,0,0,0.5);
+      padding: 15px 25px;
+      border-radius: 15px;
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+    }
+    
+    .skill {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+      gap: 15px;
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+    }
+    
+    .skill span:first-child {
+      flex: 1;
+      text-align: right;
+      font-weight: bold;
+      min-width: 120px;
+    }
+    
+    .skill-bar {
+      flex: 3;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      height: 25px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .skill-level {
+      height: 100%;
+      background: linear-gradient(90deg, #335270, #4a6b8a);
+      border-radius: 15px;
+      transition: width 2s ease-in-out;
+      position: relative;
+    }
+    
+    .skill-level::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      animation: shimmer 2s infinite;
+    }
+    
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    
+    .skill-percent {
+      width: 50px;
+      text-align: left;
+      font-weight: bold;
+      color: #aaccff;
+    }
+
+    .projects {
+      max-width: 1000px;
+      margin: 50px auto;
+      color: white;
+      font-family: 'dv', 'Tahoma', sans-serif;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+    }
+    
+    .projects h1 {
+      margin-bottom: 40px;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      padding: 15px 25px;
+      border-radius: 15px;
+    }
+    
+    .project-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      justify-items: center;
+    }
+    
+    .project-card {
+      background: rgba(51, 82, 112, 0.8);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 320px;
+      padding: 20px;
+      transition: all 0.3s ease;
+      text-align: right;
+      direction: rtl;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .project-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+    
+    .project-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-bottom: 15px;
+    }
+    
+    .project-card h3 {
+      margin-bottom: 12px;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      border: none;
+      background: none;
+      padding: 0;
+    }
+    
+    .project-card p {
+      font-size: clamp(0.8rem, 2vw, 0.95rem);
+      margin-bottom: 20px;
+      line-height: 1.5;
+      text-align: justify;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .project-card a {
+      color: #aaccff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      float: left;
+      padding: 8px 15px;
+      background: rgba(170, 204, 255, 0.1);
+      border-radius: 20px;
+      border: 1px solid #aaccff;
+    }
+    
+    .project-card a:hover {
+      color: #fff;
+      background: #aaccff;
+      transform: scale(1.05);
+    }
+
+    .rezome {
+      margin: 30px auto;
+      text-align: center;
+    }
+
+    .btn-rezome {
+      display: inline-block;
+      padding: 18px 35px;
+      background: linear-gradient(135deg, #335270, #4a6b8a);
+      box-shadow: 0 8px 25px rgba(51, 82, 112, 0.4);
+      border-radius: 25px;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      font-weight: bold;
+      border: 2px solid transparent;
+    }
+
+    .btn-rezome:hover {
+      background: linear-gradient(135deg, #4a6b8a, #335270);
+      box-shadow: 0 12px 35px rgba(51, 82, 112, 0.6);
+      transform: translateY(-3px) scale(1.05);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* موبایل - حفظ طراحی دسکتاپ */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+        background-attachment: scroll;
+      }
+      
+      /* حفظ لایوت افقی برای about section */
+      .about-section {
+        flex-direction: row;
+        text-align: right;
+        gap: 20px;
+      }
+      
+      .about-section img {
+        width: 150px;
+        height: 150px;
+        flex-shrink: 0;
+      }
+      
+      .about-text {
+        text-align: right;
+        flex: 1;
+        min-width: auto;
+      }
+      
+      .about-text h1 {
+        text-align: center;
+      }
+      
+      .about-text p {
+        text-align: justify;
+      }
+      
+      /* حفظ skills در همان فرمت */
+      .skills {
+        margin: 30px auto;
+        padding: 20px;
+      }
+      
+      .skill {
+        flex-direction: row;
+        text-align: right;
+        gap: 10px;
+        align-items: center;
+      }
+      
+      .skill span:first-child {
+        text-align: right;
+        min-width: 80px;
+        flex: 1;
+      }
+      
+      .skill-bar {
+        flex: 2;
+      }
+      
+      .skill-percent {
+        width: 40px;
+        text-align: left;
+      }
+      
+      /* حفظ grid برای projects */
+      .project-list {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .project-card {
+        max-width: 100%;
+        text-align: right;
+      }
+      
+      nav {
+        margin-bottom: 30px;
+      }
+      
+      nav a {
+        min-width: 100px;
+        padding: 10px 15px;
+      }
+    }
+
+    /* موبایل کوچک */
+    @media (max-width: 480px) {
+      .about-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+      }
+      
+      .about-text {
+        text-align: center;
+      }
+      
+      .about-text h1,
+      .about-text p {
+        text-align: center;
+      }
+      
+      .skill {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+      }
+      
+      .skill span:first-child {
+        text-align: center;
+        min-width: auto;
+      }
+      
+      .skill-bar {
+        width: 100%;
+      }
+    }
+
+    /* تبلت */
+    @media (max-width: 1024px) and (min-width: 769px) {
+      .project-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* انیمیشن برای لود صفحه */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* اسکرول نرم */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="fade-in">خوش آمدید به دنیای من</h1>
+    <h2 class="fade-in">👨‍💻 برنامه‌نویس | عاشق یادگیری | دنیای تکنولوژی، برق و الکترونیک</h2>
+    <nav id="social-links" class="fade-in"></nav>
+    <h3 class="fade-in">راه های ارتباطی با من</h3>
+
+    <section class="about-section fade-in">
+      <img id="profile-img" src="" alt="تصویر من" />
+      <div class="about-text">
+        <h1>دربـاره مـن</h1>
+        <p id="about-text"></p>
+      </div>
+    </section>
+
+    <section class="skills fade-in">
+      <h1>مهارت‌ها</h1>
+      <div id="skills-list"></div>
+    </section>
+
+    <section class="projects fade-in">
+      <h1>پروژه‌ها</h1>
+      <div id="project-list" class="project-list"></div>
+    </section>
+  </div>
+  
+  <div class="rezome fade-in">
+    <a href="رزومه.pdf" target="_blank" class="btn-rezome">مشاهده رزومه</a>
+  </div>
+
+<script>
+  // داده‌ها
+  const socialLinks = [
+    { name: "Instagram", url: "https://www.instagram.com/sina.tpa/"},
+    { name: "Telegram", url: "https://t.me/sinatpa1717"},
+    { name: "Email", url: "#"}
+  ];
+
+  const about = {
+    img: "root.png",
+    text: `مـن سینـا هستـم، عـلاقه‌منـد بـه بـرنـامـه‌نـویسی، طراحی وب و امنیت سایبری. همیشه دنبال یادگیری مهارت‌های جدید و پیشرفت در دنیای تکنولوژی هستم. همچنین در زمینه برق و الکترونیک هم تخصص دارم و دوست دارم دانش خودم رو در این زمینه‌ها گسترش بدم. هدفم اینه که با تلاش و پشتکار، بهترین نسخه از خودم باشم و همیشه قدم‌های مثبت بردارم.`
+  };
+
+  const skills = [
+  { name: "برنامه‌نویسی وب", level: 60 },
+  { name: "امنیت سایبری", level: 50 },
+  { name: "برق و الکترونیک", level: 60 },
+  { name: "ICD", level: 70 },
+  { name: "Proteus", level: 60 },
+  { name: "Altium Designer", level: 60 }
+  ];
+
+  const projects = [
+    {
+      img: "Screenshot (36).png",
+      title: "طراحی مدار الکترونیکی",
+      desc: "طراحی یک مدار الکترونیکی چشمک زن 555",
+      link: "#"
+    },
+    {
+      img: "Screenshot (29).png",
+      title: "طراحی مدار الکترونیکی",
+      desc: "طراحی مدار الکترونیکی LED",
+      link: "#"
+    },
+    {
+      img: "Screenshot (30).png",
+      title: "طراحی صفحه چت با AI",
+      desc: "طراحی یک صفحه چت هوشمند",
+      link: "#"
+    }
+  ];
+
+  // ساخت لینک‌های شبکه اجتماعی
+  const nav = document.getElementById("social-links");
+  socialLinks.forEach(link => {
+    const a = document.createElement("a");
+    a.href = link.url;
+    a.textContent = link.name;
+    nav.appendChild(a);
+  });
+
+  // بارگذاری درباره من
+  document.getElementById("profile-img").src = about.img;
+  document.getElementById("about-text").textContent = about.text;
+
+  // بارگذاری مهارت‌ها
+  const skillsList = document.getElementById("skills-list");
+  skills.forEach((skill, index) => {
+    const skillDiv = document.createElement("div");
+    skillDiv.className = "skill";
+    skillDiv.innerHTML = `
+      <span>${skill.name}</span>
+      <div class="skill-bar">
+        <div class="skill-level" style="width:0%;" data-level="${skill.level}"></div>
+      </div>
+      <span class="skill-percent">${skill.level}%</span>
+    `;
+    skillsList.appendChild(skillDiv);
+  });
+
+  // بارگذاری پروژه‌ها
+  const projectList = document.getElementById("project-list");
+  projects.forEach(proj => {
+    const card = document.createElement("div");
+    card.className = "project-card";
+    card.innerHTML = `
+      <img src="${proj.img}" alt="${proj.title}" />
+      <h3>${proj.title}</h3>
+      <p>${proj.desc}</p>
+      <a href="${proj.link}" target="_blank">مشاهده پروژه</a>
+    `;
+    projectList.appendChild(card);
+  });
+
+  // انیمیشن مهارت‌ها
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const skillLevels = document.querySelectorAll('.skill-level');
+      skillLevels.forEach(level => {
+        const targetWidth = level.getAttribute('data-level');
+        level.style.width = targetWidth + '%';
+      });
+    }, 500);
+  });
+
+  // انیمیشن fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationDelay = '0.2s';
+        entry.target.classList.add('fade-in');
+      }
+    });
+  });
+
+  document.querySelectorAll('.fade-in').forEach(el => {
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
